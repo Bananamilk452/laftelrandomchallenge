@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 랜덤 라프텔 챌린지
 
-## Getting Started
+라프텔에서 최근 본 / 정주행 / 보고싶다 목록 중 하나를 골라 애니를 랜덤으로 뽑고,
+별점과 한줄평을 남겨 세로형 이미지로 저장하거나 SNS에 공유하는 팬메이드 프로젝트입니다.
 
-First, run the development server:
+- 배포 주소: [https://laftelrandomchallenge.seoa.dev](https://laftelrandomchallenge.seoa.dev)
+
+## 기능
+
+- 라프텔 이메일 로그인 (로그인 토큰은 httpOnly 쿠키로 보관)
+- 프로필 선택 (선택한 프로필은 저장하지 않아 새로고침하면 다시 선택)
+- 최근 본 / 정주행 / 보고싶다 목록에서 랜덤 뽑기
+- 0.5점 단위 별점과 한줄평 작성
+- 결과 카드를 세로형 PNG 이미지로 저장
+- X(트위터) / 인스타그램 공유 및 캡션 복사
+- 모바일/데스크톱 반응형 UI
+
+## 실행
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[http://localhost:3000](http://localhost:3000)에서 확인할 수 있습니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm lint
+pnpm build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 구조
 
-## Learn More
+- Next.js App Router
+- TanStack Query v5 (서버 상태 관리)
+- shadcn/ui + Tailwind CSS v4
+- 라프텔 API 프록시: `app/api/*`
+- 프로필 선택 시 `profiles/v1/{profile.id}/token/`로 프로필 토큰을 교환해 프로필별 목록 조회
+- 썸네일 CORS 우회 프록시: `app/api/image`
+- 이미지 캡처: `html-to-image`
 
-To learn more about Next.js, take a look at the following resources:
+## 참고
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 라프텔 공식 서비스가 아닌 팬메이드 프로젝트입니다.
+- 라프텔 비공식 API를 사용하므로 API 스펙이 변경되면 동작하지 않을 수 있습니다.
+- 폰트: [온글잎 박다현체](https://noonnu.cc/font_page/1541)

@@ -1,26 +1,334 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-cream: var(--cream);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-coral: var(--coral);
+  --color-butter: var(--butter);
+  --color-mint: var(--mint);
+  --color-blush: var(--blush);
+  --color-kraft: var(--kraft);
+  --color-muted-ink: var(--muted-ink);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans:
+    var(--font-park-dahyun), "Pretendard", "Apple SD Gothic Neo",
+    "Malgun Gothic", system-ui, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+  --font-heading: var(--font-sans);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --shadow-sticker-sm: 2px 2px 0 0 var(--ink);
+  --shadow-sticker: 4px 4px 0 0 var(--ink);
+  --shadow-sticker-lg: 7px 7px 0 0 var(--ink);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --cream: #f7efdf;
+  --paper: #fffdf7;
+  --ink: #3b3327;
+  --coral: #f27d6b;
+  --butter: #f7d774;
+  --mint: #a8dfc8;
+  --blush: #f6b8c8;
+  --kraft: #e7d7bd;
+  --muted-ink: #7a6a55;
+
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--coral);
+  --primary-foreground: var(--ink);
+  --secondary: var(--butter);
+  --secondary-foreground: var(--ink);
+  --muted: #f0e4d0;
+  --muted-foreground: var(--muted-ink);
+  --accent: var(--mint);
+  --accent-foreground: var(--ink);
+  --destructive: #d35d4f;
+  --border: var(--ink);
+  --input: #d8c7ab;
+  --ring: var(--coral);
+  --radius: 0.9rem;
+  --chart-1: var(--coral);
+  --chart-2: var(--butter);
+  --chart-3: var(--mint);
+  --chart-4: var(--blush);
+  --chart-5: var(--kraft);
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--coral);
+  --sidebar-primary-foreground: var(--ink);
+  --sidebar-accent: var(--butter);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--ink);
+  --sidebar-ring: var(--coral);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    min-height: 100dvh;
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--ink) 13%, transparent) 1.1px,
+      transparent 1.1px
+    );
+    background-size: 20px 20px;
+    word-break: keep-all;
+  }
+
+  ::selection {
+    background: var(--butter);
+    color: var(--ink);
+  }
+
+  input,
+  textarea {
+    font-family: inherit;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px var(--paper) inset;
+    -webkit-text-fill-color: var(--ink);
+    caret-color: var(--ink);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .paper-panel {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 1.85rem;
+    box-shadow: 7px 7px 0 0 var(--ink);
+  }
+
+  .paper-card {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 1.35rem;
+    box-shadow: 4px 4px 0 0 var(--ink);
+  }
+
+  .washi-tape {
+    pointer-events: none;
+    position: absolute;
+    height: 1.15rem;
+    width: 4.8rem;
+    background-color: color-mix(in srgb, var(--butter) 82%, white);
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0 6px,
+      rgb(255 255 255 / 0.38) 6px 11px
+    );
+    box-shadow: 0 1px 0 rgb(59 51 39 / 0.15);
+  }
+
+  .memo-lines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0 31px,
+      color-mix(in srgb, var(--ink) 16%, transparent) 31px 32px
+    );
+    background-size: 100% 32px;
+    line-height: 32px;
+  }
+
+  .dot-paper {
+    background-color: var(--cream);
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--ink) 14%, transparent) 1.3px,
+      transparent 1.3px
+    );
+    background-size: 18px 18px;
+  }
+
+  .sticker-shadow {
+    box-shadow: 4px 4px 0 0 var(--ink);
+  }
+
+  .sticker-shadow-lg {
+    box-shadow: 7px 7px 0 0 var(--ink);
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97) rotate(-0.6deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(2deg);
+  }
+}
+
+@keyframes bounce-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shuffle-left {
+  0%,
+  100% {
+    transform: translateX(0) rotate(-8deg);
+  }
+  50% {
+    transform: translateX(-18px) rotate(-14deg);
+  }
+}
+
+@keyframes shuffle-right {
+  0%,
+  100% {
+    transform: translateX(0) rotate(8deg);
+  }
+  50% {
+    transform: translateX(18px) rotate(14deg);
+  }
+}
+
+@keyframes sparkle-spin {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.25) rotate(20deg);
+    opacity: 1;
+  }
+}
+
+.animate-pop-in {
+  animation: pop-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-wiggle {
+  animation: wiggle 2.2s ease-in-out infinite;
+}
+
+.animate-float-soft {
+  animation: float-soft 4s ease-in-out infinite;
+}
+
+.animate-bounce-soft {
+  animation: bounce-soft 1.3s ease-in-out infinite;
+}
+
+.animate-shuffle-left {
+  animation: shuffle-left 0.8s ease-in-out infinite;
+}
+
+.animate-shuffle-right {
+  animation: shuffle-right 0.9s ease-in-out infinite;
+}
+
+.animate-sparkle-spin {
+  animation: sparkle-spin 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
