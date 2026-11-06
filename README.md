@@ -29,6 +29,17 @@ pnpm lint
 pnpm build
 ```
 
+## Docker 배포
+
+```bash
+docker compose up -d --build
+```
+
+- 기본적으로 `127.0.0.1:3000`에 바인딩됩니다. Caddy/Nginx/Cloudflare Tunnel 같은 리버스 프록시에서 `http://127.0.0.1:3000`으로 연결하세요.
+- 운영 환경에서는 HTTPS로 접속해야 로그인 쿠키(`Secure`)가 정상 동작합니다.
+- 로그 확인: `docker compose logs -f app`
+- 중지: `docker compose down`
+
 ## 구조
 
 - Next.js App Router
