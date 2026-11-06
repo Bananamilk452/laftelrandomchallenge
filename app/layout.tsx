@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
 import { SERVICE_URL } from "@/lib/site";
 import { Providers } from "./providers";
@@ -40,6 +41,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="ko" className={`${parkDaHyun.variable} h-full antialiased`}>
       <body className="min-h-full">
         <Providers>{children}</Providers>
+
+        <Script id="gtm-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());`}
+        </Script>
+        <Script
+          id="gtm"
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-N3XNCVP7"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
